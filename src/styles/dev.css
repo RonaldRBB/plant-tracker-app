@@ -1,0 +1,50 @@
+:root {
+    --debug-outline: rgba(255, 0, 0, 0.7);
+    --debug-padding: rgba(0, 0, 255, 0.5);
+    --debug-margin: rgba(0, 255, 0, 0.5);
+    --debug-hover: rgba(255, 165, 0, 0.8);
+    --debug-empty: rgba(255, 0, 255, 0.5);
+    --debug-background: rgba(255, 255, 0, 0.9);
+    --margin: 8px;
+}
+* {
+    outline: 1px solid var(--debug-outline);
+    position: relative;
+    box-shadow: 0 0 0 1px var(--debug-padding) inset,
+        0 0 0 calc(1px + var(--margin)) var(--debug-margin);
+}
+*::before {
+    content: attr(class);
+    position: absolute;
+    top: -15px;
+    left: 0;
+    background: var(--debug-background);
+    color: black;
+    font-size: 12px;
+    font-family: monospace;
+    padding: 2px 4px;
+    border-radius: 3px;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.9;
+}
+*:empty {
+    box-shadow: 0 0 0 2px var(--debug-empty) inset;
+}
+*:hover {
+    outline: 2px solid var(--debug-hover);
+    z-index: 99999;
+}
+img,
+iframe {
+    outline: none;
+    box-shadow: none;
+}
+@media (max-width: 768px) {
+    *::before {
+        display: none;
+    }
+    * {
+        outline: none;
+    }
+}

@@ -1,0 +1,339 @@
+@import "bulma/css/bulma.min.css";
+
+/* Reducir el tamaño de fuente base en un 5% */
+html {
+    font-size: 95%;
+}
+
+@keyframes blinkWarning {
+    0% {
+        background-color: transparent;
+    }
+    50% {
+        background-color: rgba(255, 221, 87, 0.2);
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+
+@keyframes blinkDanger {
+    0% {
+        background-color: transparent;
+    }
+    50% {
+        background-color: rgba(255, 56, 96, 0.2);
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+
+.blink-warning {
+    animation: blinkWarning 2s infinite;
+    animation-timing-function: ease-in-out;
+    font-weight: bold;
+}
+
+.blink-danger {
+    animation: blinkDanger 2s infinite;
+    animation-timing-function: ease-in-out;
+    font-weight: bold;
+}
+
+.boxNew {
+    --bulma-box-background-color: var(--bulma-scheme-main);
+    --bulma-box-color: var(--bulma-text);
+    --bulma-box-radius: 6px;
+    --bulma-box-padding: 1.25rem;
+    background-color: var(--bulma-box-background-color);
+    border-radius: var(--bulma-box-radius);
+    color: var(--bulma-box-color);
+    display: block;
+    padding: var(--bulma-box-padding);
+    margin-bottom: 1.5rem;
+    border: 1px solid #808080;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+    overflow: visible;
+}
+
+.boxNew .table-container {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    overflow: visible;
+}
+
+.boxNew table {
+    width: 100%;
+    table-layout: fixed;
+    overflow: visible;
+}
+
+.boxNew th {
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: ellipsis;
+    padding: 0.5rem;
+}
+
+.boxNew td {
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: ellipsis;
+    padding: 0.5rem;
+}
+
+.boxNew td > div {
+    overflow: visible;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
+a.boxNew:hover,
+a.boxNew:focus {
+    border-color: #ff0000;
+    outline: none;
+    box-shadow: 0 4px 8px rgb(255, 0, 0);
+}
+
+a.boxNew:active {
+    border-color: #4a4a4a;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Colores para riegos pasados */
+.watering-past-normal {
+    color: #4a90e2; /* Azul suave - riego normal realizado */
+}
+
+.watering-past-fertilizer {
+    color: #2ecc71; /* Verde vibrante - fertilizante aplicado */
+}
+
+.watering-past-slow-release {
+    color: #9b59b6; /* Púrpura - fertilizante de liberación lenta aplicado */
+}
+
+.watering-past-trichoderma {
+    color: #f1c40f; /* Amarillo dorado - trichoderma aplicado */
+}
+
+/* Colores para próximos riegos */
+.watering-next-normal {
+    color: #99c5ff; /* Azul claro - próximo riego normal */
+}
+
+.watering-next-fertilizer {
+    color: #87d37c; /* Verde claro - próximo riego con fertilizante */
+}
+
+.watering-next-slow-release {
+    color: #c39bd3; /* Púrpura claro - próximo riego con fertilizante de liberación lenta */
+}
+
+.watering-next-trichoderma {
+    color: #f4d03f; /* Amarillo brillante - próximo riego con trichoderma */
+}
+
+/* Colores de estado */
+.watering-danger {
+    color: #e74c3c; /* Rojo - advertencia de riego atrasado */
+}
+
+@keyframes blink-warning {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes blink-danger {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Estilos para el efecto de cruz en la tabla de plantas */
+.table-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.table-container table {
+    position: relative;
+}
+
+/* Solo aplicar el efecto de cruz a las celdas de las plantas, no a los encabezados ni totales */
+.table-container
+    tr:not(:first-child):not(:last-child):not([class*="has-text-left"])
+    td {
+    position: relative;
+}
+
+.table-container
+    tr:not(:first-child):not(:last-child):not([class*="has-text-left"])
+    td:hover::before {
+    content: "";
+    position: absolute;
+    background-color: rgba(72, 199, 116, 0.1); /* Verde tenue */
+    left: 0;
+    top: -100vh;
+    height: 200vh;
+    width: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.table-container
+    tr:not(:first-child):not(:last-child):not([class*="has-text-left"])
+    td:hover::after {
+    content: "";
+    position: absolute;
+    background-color: rgba(72, 199, 116, 0.1); /* Verde tenue */
+    top: 0;
+    left: -100vw;
+    width: 200vw;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.table-container tr:hover {
+    background-color: transparent !important;
+}
+
+/* Aseguramos que el contenido de las celdas esté por encima del efecto de cruz */
+.table-container td *,
+.table-container th * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Aseguramos que los tooltips estén por encima de todo */
+.has-tooltip,
+.has-tooltip-arrow,
+[data-tooltip] {
+    position: relative;
+    z-index: 9999;
+    overflow: visible;
+}
+
+/* Aseguramos que el contenido del tooltip sea visible */
+.has-tooltip::before,
+.has-tooltip-arrow::before,
+[data-tooltip]::before {
+    z-index: 10000;
+    pointer-events: none;
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.has-tooltip::after,
+.has-tooltip-arrow::after,
+[data-tooltip]::after {
+    z-index: 10000;
+    pointer-events: none;
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Loading Spinner Styles */
+.loading-spinner-container {
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+}
+
+.loading-spinner-container.fade-out {
+  opacity: 0;
+}
+
+.loading-spinner {
+  display: inline-block;
+  position: relative;
+  overflow: visible;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.loading-spinner .plant-logo {
+  width: 64px;
+  height: 64px;
+  color: #00d1b2;
+  filter: drop-shadow(0 0 8px rgba(0, 209, 178, 0.3));
+  animation: plantSpin 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+}
+
+.loading-spinner .plant-logo-svg {
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  overflow: visible;
+}
+
+.loading-spinner .plant-logo-path {
+  animation: neonGlow 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 5px currentColor);
+  overflow: visible;
+}
+
+@keyframes plantSpin {
+  0% { 
+    transform: rotate(0deg) scale(1);
+    filter: drop-shadow(0 0 8px rgba(0, 209, 178, 0.3));
+  }
+  50% { 
+    transform: rotate(180deg) scale(1.1);
+    filter: drop-shadow(0 0 12px rgba(0, 209, 178, 0.5));
+  }
+  100% { 
+    transform: rotate(360deg) scale(1);
+    filter: drop-shadow(0 0 8px rgba(0, 209, 178, 0.3));
+  }
+}
+
+@keyframes neonGlow {
+  0% { 
+    stroke: #00d1b2;
+    filter: drop-shadow(0 0 5px rgba(0, 209, 178, 0.8));
+  }
+  25% { 
+    stroke: #00c4a7;
+    filter: drop-shadow(0 0 10px rgba(0, 196, 167, 1));
+  }
+  50% { 
+    stroke: #00d1b2;
+    filter: drop-shadow(0 0 15px rgba(0, 209, 178, 1));
+  }
+  75% { 
+    stroke: #00c4a7;
+    filter: drop-shadow(0 0 10px rgba(0, 196, 167, 1));
+  }
+  100% { 
+    stroke: #00d1b2;
+    filter: drop-shadow(0 0 5px rgba(0, 209, 178, 0.8));
+  }
+}

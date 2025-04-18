@@ -1,0 +1,62 @@
+:root {
+    --debug-outline: rgba(255, 0, 0, 0.7);
+    --debug-padding: rgba(0, 0, 255, 0.5); 
+    --debug-margin: rgba(0, 255, 0, 0.5); /* Márgenes: Verde claro */
+    --debug-hover: rgba(255, 165, 0, 0.8); /* Hover: Naranja */
+    --debug-empty: rgba(255, 0, 255, 0.5); /* Elementos vacíos: Rosa */
+    --debug-background: rgba(255, 255, 0, 0.9); /* Fondo etiquetas ::before */
+    --margin: 8px; /* Espaciado para márgenes visualizados */
+}
+
+/* Aplicar depuración solo dentro de un contenedor con la clase .debug */
+.debug * {
+    outline: 1px solid var(--debug-outline); /* Bordes rojos */
+    position: relative; /* Habilita ::before */
+    box-shadow: 0 0 0 1px var(--debug-padding) inset,
+        /* Padding: Azul claro */ 0 0 0 calc(1px + var(--margin))
+            var(--debug-margin); /* Márgenes: Verde claro */
+}
+
+.debug *::before {
+    content: attr(class); /* Muestra la clase del elemento */
+    position: absolute;
+    top: -15px;
+    left: 0;
+    background: var(--debug-background);
+    color: black;
+    font-size: 12px;
+    font-family: monospace;
+    padding: 2px 4px;
+    border-radius: 3px;
+    z-index: 9999;
+    pointer-events: none; /* Evita interferir con clics */
+    opacity: 0.9;
+}
+
+/* Elementos vacíos dentro del contenedor de depuración */
+.debug *:empty {
+    box-shadow: 0 0 0 2px var(--debug-empty) inset; /* Rosa para vacíos */
+}
+
+/* Resaltar elementos en hover */
+.debug *:hover {
+    outline: 2px solid var(--debug-hover); /* Naranja */
+    z-index: 99999; /* Llevar al frente */
+}
+
+/* Evitar estilos de depuración en imágenes y iframes */
+.debug img,
+.debug iframe {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Ajustes para dispositivos pequeños */
+@media (max-width: 768px) {
+    .debug *::before {
+        display: none; /* Ocultar etiquetas en pantallas pequeñas */
+    }
+    .debug * {
+        outline: none; /* Evitar ruido visual en pantallas pequeñas */
+    }
+}
