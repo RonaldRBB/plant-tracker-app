@@ -7,6 +7,7 @@ import {
     PointElement,
     LineElement,
     BarElement,
+    BarController,
     Title,
     Tooltip,
     Legend,
@@ -23,11 +24,17 @@ ChartJS.register(
     PointElement,
     LineElement,
     BarElement,
+    BarController,
     Title,
     Tooltip,
     Legend,
     Filler
 );
+
+// Configuración global de Chart.js
+ChartJS.defaults.font.family = "'Inter', sans-serif";
+ChartJS.defaults.plugins.legend.display = true;
+ChartJS.defaults.plugins.tooltip.enabled = true;
 
 export default function WeatherCharts({ weatherData }) {
     const intl = useIntl();
@@ -238,7 +245,7 @@ export default function WeatherCharts({ weatherData }) {
             </h2>
             <DatasetControls />
             <div style={{ height: '400px' }}>
-                <Line options={combinedOptions} data={combinedData} />
+                <Bar options={combinedOptions} data={combinedData} />
             </div>
         </div>
     );

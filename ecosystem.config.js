@@ -3,11 +3,19 @@ module.exports = {
     {
       name: 'plant-tracker-app',
       script: 'npm',
-      args: 'run dev -- -p 80',
+      args: 'run start',
       cwd: '/media/r/data/prog/personal/plant-tracker-app/',
       env: {
-        PATH: process.env.PATH
+        PATH: process.env.PATH,
+        NODE_ENV: 'production',
+        PORT: 3000,
+        HOST: '0.0.0.0'
+      },
+      env_production: {
+        NODE_ENV: 'production',
+        PORT: 3000,
+        HOST: '0.0.0.0'
       }
     }
   ]
-};
+}; 
