@@ -156,7 +156,10 @@ export const messages = {
     'watering.type.trichoderma': 'Riego con Trichoderma',
     'watering.type.fertilizer': 'Riego con Fertilizante',
     'watering.type.normal': 'Riego Normal',
-    'plants.groupByGenus': 'Agrupar por Género',
-    'plants.groupByWatering': 'Agrupar por Riego',
-    'plants.groupByLocation': 'Agrupar por Ubicación',
+    'plants.groupByGenus': 'Género',
+    'plants.groupByWatering': 'Riego',
+    'plants.groupByLocation': 'Ubicación',
+    'plants.groupByGenus.tooltip': 'Agrupar plantas por su clasificación taxonómica',
+    'plants.groupByWatering.tooltip': 'Agrupar plantas por su próximo tipo de riego',
+    'plants.groupByLocation.tooltip': 'Agrupar plantas por su ubicación',
 }; 

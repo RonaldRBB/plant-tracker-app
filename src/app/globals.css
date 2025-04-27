@@ -1,0 +1,41 @@
+.grouping-selector {
+    margin: 1.5rem 0;
+}
+
+.grouping-selector .buttons {
+    display: inline-flex;
+    background: #f5f5f5;
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.grouping-selector .button {
+    border: none;
+    margin: 0;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+}
+
+.grouping-selector .button:not(.is-primary) {
+    background: transparent;
+}
+
+.grouping-selector .button.is-primary {
+    background: #3273dc;
+    color: white;
+    box-shadow: 0 2px 4px rgba(50, 115, 220, 0.2);
+}
+
+.grouping-selector .button:hover:not(.is-primary) {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.grouping-selector .button .icon {
+    margin-right: 0.5rem;
+}
+
+.grouping-selector .button .icon i {
+    font-size: 1rem;
+} 

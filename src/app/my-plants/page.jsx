@@ -14,6 +14,7 @@ import { getStandardizedDate, getDayOfWeekLetter, getDaysInSelectedMonth } from 
 import { getCurrentDay } from '@/lib/utils/dateUtils';
 import { FormattedMessage } from 'react-intl';
 import LoadingSpinner from "@/components/LoadingSpinner";
+import { useIntl } from 'react-intl';
 
 const MyPlants = () => {
     const { weather } = useWeather();
@@ -43,6 +44,8 @@ const MyPlants = () => {
     const [plantToDelete, setPlantToDelete] = useState(null);
     const [showContent, setShowContent] = useState(false);
     const [groupByType, setGroupByType] = useState('genus');
+
+    const intl = useIntl();
 
     useEffect(() => {
         loadUserPlants();
@@ -86,25 +89,45 @@ const MyPlants = () => {
                 <FormattedMessage id="modal.addPlant" defaultMessage="Agregar Planta" />
             </button>
 
-            <div className="buttons is-centered mt-4">
-                <button 
-                    className={`button ${groupByType === 'genus' ? 'is-primary' : 'is-light'}`}
-                    onClick={() => setGroupByType('genus')}
-                >
-                    <FormattedMessage id="plants.groupByGenus" defaultMessage="Agrupar por Género" />
-                </button>
-                <button 
-                    className={`button ${groupByType === 'watering' ? 'is-primary' : 'is-light'}`}
-                    onClick={() => setGroupByType('watering')}
-                >
-                    <FormattedMessage id="plants.groupByWatering" defaultMessage="Agrupar por Riego" />
-                </button>
-                <button 
-                    className={`button ${groupByType === 'location' ? 'is-primary' : 'is-light'}`}
-                    onClick={() => setGroupByType('location')}
-                >
-                    <FormattedMessage id="plants.groupByLocation" defaultMessage="Agrupar por Ubicación" />
-                </button>
+            <div className="grouping-selector mt-4">
+                <div className="buttons has-addons is-centered">
+                    <button 
+                        className={`button ${groupByType === 'genus' ? 'is-primary' : 'is-light'}`}
+                        onClick={() => setGroupByType('genus')}
+                        data-tooltip={intl.formatMessage({ id: 'plants.groupByGenus.tooltip' })}
+                    >
+                        <span className="icon">
+                            <i className="fas fa-sitemap"></i>
+                        </span>
+                        <span>
+                            <FormattedMessage id="plants.groupByGenus" defaultMessage="Género" />
+                        </span>
+                    </button>
+                    <button 
+                        className={`button ${groupByType === 'watering' ? 'is-primary' : 'is-light'}`}
+                        onClick={() => setGroupByType('watering')}
+                        data-tooltip={intl.formatMessage({ id: 'plants.groupByWatering.tooltip' })}
+                    >
+                        <span className="icon">
+                            <i className="fas fa-tint"></i>
+                        </span>
+                        <span>
+                            <FormattedMessage id="plants.groupByWatering" defaultMessage="Riego" />
+                        </span>
+                    </button>
+                    <button 
+                        className={`button ${groupByType === 'location' ? 'is-primary' : 'is-light'}`}
+                        onClick={() => setGroupByType('location')}
+                        data-tooltip={intl.formatMessage({ id: 'plants.groupByLocation.tooltip' })}
+                    >
+                        <span className="icon">
+                            <i className="fas fa-map-marker-alt"></i>
+                        </span>
+                        <span>
+                            <FormattedMessage id="plants.groupByLocation" defaultMessage="Ubicación" />
+                        </span>
+                    </button>
+                </div>
             </div>
 
             {addModal.isOpen && (

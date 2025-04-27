@@ -54,6 +54,12 @@ export const messages = {
     'plants.acquiredDate': 'Acquisition Date',
     'plants.deathDate': 'Death Date',
     'plants.mycorrhizaDate': 'Mycorrhiza Application Date',
+    'plants.groupByGenus': 'Genus',
+    'plants.groupByWatering': 'Watering',
+    'plants.groupByLocation': 'Location',
+    'plants.groupByGenus.tooltip': 'Group plants by their taxonomic classification',
+    'plants.groupByWatering.tooltip': 'Group plants by their next watering type',
+    'plants.groupByLocation.tooltip': 'Group plants by their location',
 
     // Watering
     'watering.title': 'Watering',
@@ -155,4 +161,9 @@ export const messages = {
     'taxonomic.noClass': 'No Class',
     'taxonomic.noOrder': 'No Order',
     'taxonomic.noFamily': 'No Family',
+
+    // New watering types
+    'watering.type.trichoderma': 'Watering with Trichoderma',
+    'watering.type.fertilizer': 'Watering with Fertilizer',
+    'watering.type.normal': 'Normal Watering',
 }; 
