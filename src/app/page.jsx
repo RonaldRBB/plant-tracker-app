@@ -14,10 +14,7 @@ export default function Home() {
 
     useEffect(() => {
         if (!loading) {
-            const timer = setTimeout(() => {
-                setShowContent(true);
-            }, 500); // Esperar a que termine la animación de fade out
-            return () => clearTimeout(timer);
+            setShowContent(true);
         }
     }, [loading]);
 

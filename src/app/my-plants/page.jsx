@@ -12,9 +12,9 @@ import PlantsTable from "@/components/my-plants/PlantsTable";
 import CurrentWeather from "@/components/CurrentWeather";
 import { getStandardizedDate, getDayOfWeekLetter, getDaysInSelectedMonth } from "@/components/my-plants/utils/calendar-helpers";
 import { getCurrentDay } from '@/lib/utils/dateUtils';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import LoadingSpinner from "@/components/LoadingSpinner";
-import { useIntl } from 'react-intl';
+import '@/styles/globals.css';
 
 const MyPlants = () => {
     const { weather } = useWeather();
@@ -53,10 +53,7 @@ const MyPlants = () => {
 
     useEffect(() => {
         if (!plantsLoading) {
-            const timer = setTimeout(() => {
-                setShowContent(true);
-            }, 500);
-            return () => clearTimeout(timer);
+            setShowContent(true);
         }
     }, [plantsLoading]);
 
@@ -163,11 +160,8 @@ const MyPlants = () => {
             {deleteModal.isOpen && plantToDelete && (
                 <DeleteConfirmationModal
                     plantName={`${plantToDelete.plant.scientific_name} - ${plantToDelete.location}`}
-                    closeModal={() => {
-                        deleteModal.closeModal();
-                        setPlantToDelete(null);
-                    }}
                     onConfirm={confirmDelete}
+                    onCancel={() => deleteModal.closeModal()}
                 />
             )}
 

@@ -3,17 +3,9 @@ import PlantLogo from "./PlantLogo";
 import { useEffect, useState } from "react";
 
 export default function LoadingSpinner() {
-  const [isVisible, setIsVisible] = useState(true);
-
-  useEffect(() => {
-    return () => {
-      setIsVisible(false);
-    };
-  }, []);
-
   return (
     <div 
-      className={`has-text-centered loading-spinner-container ${!isVisible ? 'fade-out' : ''}`}
+      className="has-text-centered loading-spinner-container"
       style={{ 
         padding: '3rem',
         display: 'flex',
