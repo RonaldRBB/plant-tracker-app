@@ -41,6 +41,12 @@ export const usePlants = () => {
     const getGroupedPlants = (groupBy = 'genus') => {
         if (!userPlants || !userPlants.length) return [];
 
+        console.log('Plantas y sus logs:', userPlants.map(plant => ({
+            id: plant.id,
+            name: plant.plant?.scientific_name,
+            watering_logs: plant.watering_logs
+        })));
+
         if (groupBy === 'location') {
             const grouped = userPlants.reduce((acc, plant) => {
                 const location = plant.location || intl.formatMessage({ id: 'plants.location.unknown' });
@@ -69,6 +75,21 @@ export const usePlants = () => {
         }
 
         if (groupBy === 'watering') {
+            const isRecentlyWatered = (plant) => {
+                if (!plant.watering_logs || plant.watering_logs.length === 0) return false;
+                
+                const sortedLogs = [...plant.watering_logs].sort((a, b) => 
+                    new Date(b.watering_date) - new Date(a.watering_date)
+                );
+                
+                const lastWateringDate = new Date(sortedLogs[0].watering_date);
+                const today = new Date();
+                const diffTime = Math.abs(today - lastWateringDate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                
+                return diffDays <= 3;
+            };
+
             const grouped = {
                 'trichoderma': {
                     displayName: intl.formatMessage({ id: 'watering.type.trichoderma' }),
@@ -81,21 +102,29 @@ export const usePlants = () => {
                 'normal': {
                     displayName: intl.formatMessage({ id: 'watering.type.normal' }),
                     plants: []
+                },
+                'recently_watered': {
+                    displayName: intl.formatMessage({ id: 'watering.type.recentlyWatered' }),
+                    plants: []
                 }
             };
 
             userPlants.forEach(plant => {
-                const nextWatering = plant.next_watering_date;
-                if (nextWatering) {
-                    if (nextWatering.with_trichoderma) {
-                        grouped.trichoderma.plants.push(plant);
-                    } else if (nextWatering.with_fertilizer) {
-                        grouped.fertilizer.plants.push(plant);
+                if (isRecentlyWatered(plant)) {
+                    grouped.recently_watered.plants.push(plant);
+                } else {
+                    const nextWatering = plant.next_watering_date;
+                    if (nextWatering) {
+                        if (nextWatering.with_trichoderma) {
+                            grouped.trichoderma.plants.push(plant);
+                        } else if (nextWatering.with_fertilizer) {
+                            grouped.fertilizer.plants.push(plant);
+                        } else {
+                            grouped.normal.plants.push(plant);
+                        }
                     } else {
                         grouped.normal.plants.push(plant);
                     }
-                } else {
-                    grouped.normal.plants.push(plant);
                 }
             });
 

@@ -73,6 +73,7 @@ export const messages = {
     'watering.frequency.summer': 'Summer Watering (days)',
     'watering.frequency.autumn': 'Autumn Watering (days)',
     'watering.frequency.winter': 'Winter Watering (days)',
+    'watering.type.recentlyWatered': 'Recently Watered',
 
     // Light
     'light.type': 'Light Type',

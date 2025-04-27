@@ -156,6 +156,7 @@ export const messages = {
     'watering.type.trichoderma': 'Riego con Trichoderma',
     'watering.type.fertilizer': 'Riego con Fertilizante',
     'watering.type.normal': 'Riego Normal',
+    'watering.type.recentlyWatered': 'Regadas recientemente',
     'plants.groupByGenus': 'Género',
     'plants.groupByWatering': 'Riego',
     'plants.groupByLocation': 'Ubicación',
