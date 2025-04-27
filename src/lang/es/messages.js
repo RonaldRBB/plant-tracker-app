@@ -54,6 +54,7 @@ export const messages = {
     'plants.acquiredDate': 'Fecha de Adquisición',
     'plants.deathDate': 'Fecha de Muerte',
     'plants.mycorrhizaDate': 'Fecha de Aplicación de Micorriza',
+    'plants.location.unknown': 'Ubicación Desconocida',
 
     // Riego
     'watering.title': 'Riego',
@@ -150,4 +151,12 @@ export const messages = {
     'taxonomic.noClass': 'Sin Clase',
     'taxonomic.noOrder': 'Sin Orden',
     'taxonomic.noFamily': 'Sin Familia',
+
+    // Nuevos mensajes
+    'watering.type.trichoderma': 'Riego con Trichoderma',
+    'watering.type.fertilizer': 'Riego con Fertilizante',
+    'watering.type.normal': 'Riego Normal',
+    'plants.groupByGenus': 'Agrupar por Género',
+    'plants.groupByWatering': 'Agrupar por Riego',
+    'plants.groupByLocation': 'Agrupar por Ubicación',
 }; 

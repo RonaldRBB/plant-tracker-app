@@ -42,6 +42,7 @@ const MyPlants = () => {
 
     const [plantToDelete, setPlantToDelete] = useState(null);
     const [showContent, setShowContent] = useState(false);
+    const [groupByType, setGroupByType] = useState('genus');
 
     useEffect(() => {
         loadUserPlants();
@@ -51,7 +52,7 @@ const MyPlants = () => {
         if (!plantsLoading) {
             const timer = setTimeout(() => {
                 setShowContent(true);
-            }, 500); // Esperar a que termine la animación de fade out
+            }, 500);
             return () => clearTimeout(timer);
         }
     }, [plantsLoading]);
@@ -84,6 +85,27 @@ const MyPlants = () => {
             <button className="button is-primary is-fullwidth" onClick={addModal.openModal}>
                 <FormattedMessage id="modal.addPlant" defaultMessage="Agregar Planta" />
             </button>
+
+            <div className="buttons is-centered mt-4">
+                <button 
+                    className={`button ${groupByType === 'genus' ? 'is-primary' : 'is-light'}`}
+                    onClick={() => setGroupByType('genus')}
+                >
+                    <FormattedMessage id="plants.groupByGenus" defaultMessage="Agrupar por Género" />
+                </button>
+                <button 
+                    className={`button ${groupByType === 'watering' ? 'is-primary' : 'is-light'}`}
+                    onClick={() => setGroupByType('watering')}
+                >
+                    <FormattedMessage id="plants.groupByWatering" defaultMessage="Agrupar por Riego" />
+                </button>
+                <button 
+                    className={`button ${groupByType === 'location' ? 'is-primary' : 'is-light'}`}
+                    onClick={() => setGroupByType('location')}
+                >
+                    <FormattedMessage id="plants.groupByLocation" defaultMessage="Agrupar por Ubicación" />
+                </button>
+            </div>
 
             {addModal.isOpen && (
                 <UserPlantModal 
@@ -137,7 +159,7 @@ const MyPlants = () => {
                     daysInMonth={daysInMonth}
                     selectedDate={selectedDate}
                     currentDay={currentDay}
-                    getGroupedPlants={getGroupedPlants}
+                    getGroupedPlants={() => getGroupedPlants(groupByType)}
                     userPlants={userPlants}
                     editModal={editModal}
                     wateringModal={wateringModal}
