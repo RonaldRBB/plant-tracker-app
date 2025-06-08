@@ -28,12 +28,12 @@ fi
 
 # Cargar variables de entorno
 log "Cargando variables de entorno..."
-if [ ! -f .env ]; then
-    error "No se encontró el archivo .env"
+if [ ! -f .env.production ]; then
+    error "No se encontró el archivo .env.production"
 fi
 
 set -a
-source .env
+source .env.production
 set +a
 
 # Verificar variables de entorno requeridas
@@ -63,6 +63,10 @@ fi
 log "Iniciando la aplicación $APP_NAME..."
 pm2 start "$PM2_CONFIG_FILE" --env production || error "No se pudo iniciar la aplicación"
 
+# Configurar el watch solo para archivos de build
+log "Configurando watch para archivos de build..."
+pm2 restart "$APP_NAME" --update-env --watch dist --ignore-watch="node_modules .git .next"
+
 # Verificar el estado de la aplicación
 log "Verificando el estado de la aplicación..."
 pm2 status
@@ -76,4 +80,4 @@ else
     error "La aplicación no está respondiendo en http://$APP_HOST:$APP_PORT"
 fi
 
-log "Aplicación iniciada correctamente" 
+log "Aplicación iniciada correctamente con watch para archivos de build" 
