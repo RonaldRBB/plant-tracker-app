@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ path: '.env.production' });
 
 module.exports = {
   apps: [
@@ -14,6 +14,7 @@ module.exports = {
         HOST: process.env.APP_HOST
       },
       env_production: {
+        PATH: process.env.PATH,
         NODE_ENV: process.env.NODE_ENV,
         PORT: process.env.APP_PORT,
         HOST: process.env.APP_HOST
